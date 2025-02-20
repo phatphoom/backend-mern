@@ -6,7 +6,14 @@ require("dotenv").config();
 const app = express();
 const NoteController = require("./Note");
 
-app.use(cors({ origin: "*" }));
+// app.use(cors({ origin: "*" }));
+app.use(
+  cors({
+    origin: "*",
+    methods: "GET, POST, PUT, DELETE, OPTIONS",
+    allowedHeaders: "Content-Type, Authorization",
+  })
+);
 app.use(express.json());
 app.use("/api", NoteController);
 
