@@ -2,12 +2,17 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
+
 const app = express();
-app.use(express.json());
-app.use(cors());
 const NoteController = require("./Note");
+
+app.use(cors());
+app.use(express.json());
+app.use("/api", NoteController);
+
 mongoose.connect(process.env.MONGODB_URI).then(() => {
   console.log("connected db");
 });
-app.use("/", NoteController);
-app.listen("5000", () => console.log("Happy"));
+const port = process.env.PORT || 5000;
+app.listen(port, () => console.log("Happy"));
+module.exports = app;
