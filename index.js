@@ -6,7 +6,7 @@ require("dotenv").config();
 const app = express();
 const NoteController = require("./Note");
 
-app.use(cors());
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use("/api", NoteController);
 
